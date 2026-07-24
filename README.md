@@ -42,4 +42,4 @@ AI Agent
 
 ## Screenshot
 
-"C:\Users\Dell\OneDrive\图片\Screenshots 1\Workflow Image.png"
+![Workflow](images/Workflow Photo.png)
