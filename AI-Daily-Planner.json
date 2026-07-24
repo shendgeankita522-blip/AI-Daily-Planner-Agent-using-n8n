@@ -1,0 +1,141 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "cf87fb3d-b477-405f-97bf-e47061b2a07a",
+      "name": "When chat message received",
+      "webhookId": "8a619ac8-972a-4830-8d1a-c4d019d7d3dc"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an AI Daily Planner Assistant.\n\nYou have access to a Google Sheets tool.\n\nAlways use the Google Sheets tool before answering.\n\nThe sheet contains these columns:\n- Time\n- Task\n- Category\n- Priority\n- Status\n- Notes\n\nAnswer only using data from the sheet.\n\nExamples:\n\nIf the user asks:\n\"What are my pending tasks?\"\n→ Return only rows where Status = Pending.\n\nIf the user asks:\n\"What is my current task?\"\n→ Find the matching time.\n\nIf the user asks:\n\"Show only high priority tasks.\"\n→ Return only Priority = High.\n\nIf the user asks:\n\"What learning tasks do I have?\"\n→ Return only Category = Learning.\n\nBe concise and friendly."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "98300b7d-46a1-4307-be75-d34e542625a7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1Tif_4n7FgkLqM4v_bxF85cn8nSE-sxX6XxoNsGFXv-o/edit?gid=887271989#gid=887271989",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 887271989,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Tif_4n7FgkLqM4v_bxF85cn8nSE-sxX6XxoNsGFXv-o/edit#gid=887271989"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        368,
+        208
+      ],
+      "id": "790eb3d2-7af4-481e-8ae9-75620971c2e8",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "f9RKItygTUXiDCOp",
+          "name": "Google Sheets account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        208
+      ],
+      "id": "3efe106b-18af-4424-9189-cb72e21142b8",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "4b6e0549-7a8d-49d9-a8e9-addea97b6aaa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "574d6e0188afd98e33ec090e22727d5d4722458cff440fe5d91e8951b68cc23c"
+  },
+  "nodeGroups": [],
+  "id": "JvMulN1wZKRpGiv0",
+  "tags": []
+}
