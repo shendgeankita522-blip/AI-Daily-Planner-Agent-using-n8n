@@ -42,4 +42,4 @@ AI Agent
 
 ## Screenshot
 
-![Workflow](images/Workflow Photo.png)
+![Workflow](images/Workflow PHOTO.png)
