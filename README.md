@@ -40,6 +40,4 @@ AI Agent
 - What learning tasks do I have?
 - What tasks are completed?
 
-## Screenshot
 
-![Workflow](images/Workflow PHOTO.png)
